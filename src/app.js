@@ -3,6 +3,9 @@
 // require
 var express = require('express');
 var router = require('./api');
+var app = express();
+
+require('./database');
 
 // instantiate
 var app = express();
