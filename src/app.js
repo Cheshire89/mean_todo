@@ -1,11 +1,14 @@
 'use strict';
 
+debugger;
+
 // require
 var express = require('express');
 var router = require('./api');
 var app = express();
 
 require('./database');
+require('./seed');
 
 // instantiate
 var app = express();

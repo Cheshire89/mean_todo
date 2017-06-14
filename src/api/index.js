@@ -2,10 +2,18 @@
 
 var express = require('express');
 var router = express.Router();
-var todos = require('../../mock/todos.json');
+var Todo = require('../models/todo');
+//var todos = require('../../mock/todos.json');
 
 router.get('/todos' , function(req, res){
-	res.json({todos: todos});
+	Todo.find({}, function(err, todos){
+		if(err){
+			return res.status(500).json({message: err.message});
+		}else{
+			res.json({todos: todos});
+		}
+		
+	});
 });
 
 // TODO: Add post route to create new entries
