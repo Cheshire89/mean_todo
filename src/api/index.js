@@ -22,24 +22,40 @@ router.post('/todos', function(req, res){
 		if(err){
 			return res.status(500).json({err: err.message});
 		}
-		res.json({'todo': todo, message: 'Todo Created'});
+		res.json({'todo': todo, message: 'Todo was Created'});
 	});
 });
 
 // TODO: Add put route to update existing entries
-router.put('/todos:id', function(req, res){
+router.put('/todos/:id', function(req, res){
 	var id = req.params.id;
 	var todo = req.body;
-	if(todo && todo._id !==id){
+
+	if(todo && todo._id !== id){
 		return res.status(500).json({err: "Ids dont match!"});
 	}
 	Todo.findByIdAndUpdate(id, todo, {new: true}, function(err, todo){
 		if(err){
 			return res.status(500).json({err: err.message});
 		}
-		res.json({'todo': todo, message: 'Todo Updated'});
+		res.json({'todo': todo, message: 'Todo was Updated'});
 	});
 });
 // TODO: Add delete route to delete entries
+
+router.delete('/todos/:id', function(req, res){
+	var id = req.params.id;
+	var todo = req.body;
+
+	if(todo && todo._id !== id){
+		return res.status(500).json({err: "Ids dont match!"});
+	}
+	Todo.remove({"_id":id}, function(err, todo){
+		if(err){
+			return res.status(500).json({err: err.message});
+		}
+		res.send('Todo was Deleted'});
+	});
+});
 
 module.exports = router;
