@@ -11,7 +11,7 @@ var router = require('./api');
 var app = express();
 
 require('./database');
-require('./seed');
+// require('./seed');
 
 
 //serve static files from
