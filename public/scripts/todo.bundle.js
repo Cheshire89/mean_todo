@@ -31,14 +31,6 @@ webpackJsonp([0],[
 
 	angular.module('todoListApp')
 	.controller('mainCtrl', function($scope, $log, $interval, dataService){
-	  $scope.seconds = 0;
-
-	  $scope.counter = function(){
-	  	$log.log($scope.seconds + ' have passed');
-	  	$scope.seconds++;
-	  }
-
-	  $interval($scope.counter, 1000, 10);
 
 	  dataService.getTodos(function(response){
 	    var todos = response.data.todos;  
@@ -114,9 +106,9 @@ webpackJsonp([0],[
 	  this.getTodos = function(cb) {
 	    $http.get('/api/todos').then(cb);
 	  };
-	  
+
 	  this.deleteTodo = function(todo) {
-	    console.log("I deleted the " + todo.name + " todo!");
+	    $http.delete('/api/todos/' + todo._id).then(todo);
 	  };
 	  
 	  this.saveTodos = function(todos) {

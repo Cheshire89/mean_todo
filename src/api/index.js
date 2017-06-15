@@ -43,19 +43,16 @@ router.put('/todos/:id', function(req, res){
 });
 // TODO: Add delete route to delete entries
 
-router.delete('/todos/:id', function(req, res){
-	var id = req.params.id;
-	var todo = req.body;
+router.delete('/todos/:id', function(req, res) {
+  var id = req.params.id;
 
-	if(todo && todo._id !== id){
-		return res.status(500).json({err: "Ids dont match!"});
-	}
-	Todo.remove({"_id":id}, function(err, todo){
-		if(err){
-			return res.status(500).json({err: err.message});
-		}
-		res.send('Todo was Deleted'});
-	});
+  Todo.remove({'_id': id}, function(err, todo) {
+    if (err) {
+      return res.status(500).json({err: err.message});
+    } else {
+      res.send('Todo was deleted');
+    }
+  });
 });
 
 module.exports = router;
