@@ -33,11 +33,11 @@ router.put('/todos:id', function(req, res){
 	if(todo && todo._id !==id){
 		return res.status(500).json({err: "Ids dont match!"});
 	}
-	Todo.create(todo, function(err, todo){
+	Todo.findByIdAndUpdate(id, todo, {new: true}, function(err, todo){
 		if(err){
 			return res.status(500).json({err: err.message});
 		}
-		res.json({'todo': todo, message: 'Todo Created'});
+		res.json({'todo': todo, message: 'Todo Updated'});
 	});
 });
 // TODO: Add delete route to delete entries
